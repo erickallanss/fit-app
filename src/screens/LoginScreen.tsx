@@ -6,16 +6,26 @@ import LogoTitle from '../components/AppTitle';
 import InputWithIcon from '../components/InputWithIcon';
 import PrimaryButton from '../components/PrimaryButton';
 import SecondaryButton from '../components/SecondaryButton';
-import colors from '../utils/colors';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../App';
 import { Feather } from '@expo/vector-icons';
+import { RouteProp } from '@react-navigation/native';
 
-export default function LoginScreen() {
+type LoginScreenNavigationProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'Login'>;
+};
+
+export default function LoginScreen({ navigation }: LoginScreenNavigationProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     Alert.alert('Login', `Email: ${email}, Senha: ${password}`);
   };
+
+  const navigateToRegisterPage = () => {
+    navigation.navigate('Register');
+  }
 
   return (
     <View style={styles.container}>
@@ -38,7 +48,11 @@ export default function LoginScreen() {
           onChangeText={setPassword}
         />
         <PrimaryButton onPress={handleLogin} title="Entrar" />
-        <SecondaryButton mainText='Não possui conta?' clickableText='Crie agora.' onPress={() => Alert.alert('Navigate', 'Navigate to Sign Up')} />
+        <SecondaryButton
+          mainText='Não possui conta?'
+          clickableText='Crie agora.'
+          onPress={ navigateToRegisterPage}
+        />
       </View>
     </View>
   );

@@ -1,12 +1,12 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-interface SecondaryButtonProps {
-    onPress: () => void;
-    mainText: string;
-    clickableText: string;
-    }
+type SecondaryButtonProps = {
+  mainText: string;
+  clickableText: string;
+  onPress: () => void;
+};
 
-const SecondaryButton = ({ onPress, mainText, clickableText }: SecondaryButtonProps) => {
+const SecondaryButton = ({ mainText, clickableText, onPress }: SecondaryButtonProps) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Text style={styles.secButton}>
