@@ -17,10 +17,13 @@ import {
   Montserrat_900Black,
 } from "@expo-google-fonts/montserrat";
 import { View } from 'react-native';
+import UserContextProvider from './src/contexts/UserContext';
+import HomePageScreen from './src/screens/HomePageScreen';
 
 export type RootStackParamList = {
   Login: undefined;
   Register: undefined;
+  HomePage: undefined;
 };
 
 export default function App() {
@@ -43,14 +46,14 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Register" component={RegisterScreen} />
-        </Stack.Navigator>
+        <UserContextProvider>
+          <Stack.Navigator>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="HomePage" component={HomePageScreen} />
+          </Stack.Navigator>
+        </UserContextProvider>
       </NavigationContainer>
     );
   }
-
-  
-
 }
