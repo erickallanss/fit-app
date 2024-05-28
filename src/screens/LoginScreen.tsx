@@ -9,7 +9,6 @@ import SecondaryButton from '../components/SecondaryButton';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../App';
 import { Feather } from '@expo/vector-icons';
-import { RouteProp } from '@react-navigation/native';
 
 type LoginScreenNavigationProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -20,7 +19,7 @@ export default function LoginScreen({ navigation }: LoginScreenNavigationProps) 
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    Alert.alert('Login', `Email: ${email}, Senha: ${password}`);
+    navigation.navigate('HomePage')
   };
 
   const navigateToRegisterPage = () => {
