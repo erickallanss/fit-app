@@ -12,77 +12,82 @@ import { RootStackParamList } from '../../App';
 import { RouteProp } from '@react-navigation/native';
 
 type RegisterScreenNavigationProps = {
-    navigation: StackNavigationProp<RootStackParamList, 'Register'>;
-    };
+	navigation: StackNavigationProp<RootStackParamList, 'Register'>;
+};
 
-export default function RegisterScreen({ navigation }: RegisterScreenNavigationProps) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+export default function RegisterScreen({
+	navigation,
+}: RegisterScreenNavigationProps) {
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const handleRegister = () => {
-    Alert.alert('Register', `Email: ${email}, Senha: ${password}, SenhaConfirmation: ${passwordConfirmation}`);
-  };
+	const handleRegister = () => {
+		Alert.alert(
+			'Register',
+			`Email: ${email}, Senha: ${password}, SenhaConfirmation: ${passwordConfirmation}`,
+		);
+	};
 
-  const navigateToLoginPage = () => {
-    navigation.navigate('Login');
-  }
+	const navigateToLoginPage = () => {
+		navigation.navigate('Login');
+	};
 
-  return (
-    <View style={styles.container}>
-      <BackgroundImage />
-      <StatusBar style="auto" />
-      <View style={styles.innerContainer}>
-        <LogoTitle />
-        <InputWithIcon
-          IconType={Ionicons}
-          icon="person"
-          placeholder="Nome"
-          value={name}
-          onChangeText={setName}
-        />
-        <InputWithIcon
-          IconType={Feather}
-          icon="mail"
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <InputWithIcon
-          IconType={Feather}
-          icon="lock"
-          placeholder="Senha"
-          value={password}
-          onChangeText={setPassword}
-        />
-        <InputWithIcon
-          IconType={Feather}
-          icon="lock"
-          placeholder="Confirme a senha"
-          value={passwordConfirmation}
-          onChangeText={setPasswordConfirmation}
-        />
-        <PrimaryButton onPress={handleRegister} title="Entrar" />
-        <SecondaryButton
-          mainText='Já possui conta?'
-          clickableText='Entre agora.'
-          onPress={navigateToLoginPage}
-        />
-      </View>
-    </View>
-  );
+	return (
+		<View style={styles.container}>
+			<BackgroundImage />
+			<StatusBar style="auto" />
+			<View style={styles.innerContainer}>
+				<LogoTitle />
+				<InputWithIcon
+					IconType={Ionicons}
+					icon="person"
+					placeholder="Nome"
+					value={name}
+					onChangeText={setName}
+				/>
+				<InputWithIcon
+					IconType={Feather}
+					icon="mail"
+					placeholder="Email"
+					value={email}
+					onChangeText={setEmail}
+				/>
+				<InputWithIcon
+					IconType={Feather}
+					icon="lock"
+					placeholder="Senha"
+					value={password}
+					onChangeText={setPassword}
+				/>
+				<InputWithIcon
+					IconType={Feather}
+					icon="lock"
+					placeholder="Confirme a senha"
+					value={passwordConfirmation}
+					onChangeText={setPasswordConfirmation}
+				/>
+				<PrimaryButton onPress={handleRegister} title="Entrar" />
+				<SecondaryButton
+					mainText="Já possui conta?"
+					clickableText="Entre agora."
+					onPress={navigateToLoginPage}
+				/>
+			</View>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  innerContainer: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-  },
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	innerContainer: {
+		width: '100%',
+		display: 'flex',
+		alignItems: 'center',
+	},
 });
