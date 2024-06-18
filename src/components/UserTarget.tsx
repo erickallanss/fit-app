@@ -1,17 +1,25 @@
 import { View, Text, StyleSheet } from 'react-native';
+import colors from '../utils/colors';
 
 type UserTargetProps = {
 	text: string;
 	value: string;
+	unit?: string;
 };
 
-export default function UserTarget({ text, value }: UserTargetProps) {
+export default function UserTarget({ text, value, unit }: UserTargetProps) {
 	return (
 		<View>
-			<Text style={styles.targetText}>
+			<Text style={styles.goalsText}>
 				<View style={styles.targetContainer}>
-					<Text style={styles.targetText}>{text}</Text>
-					<Text style={styles.target}>{value}</Text>
+					<Text style={styles.textStyle}>{text}</Text>
+					{unit ? (
+						<Text style={styles.target}>
+							{value} {unit}
+						</Text>
+					) : (
+						<Text style={styles.target}>{value}</Text>
+					)}
 				</View>
 			</Text>
 		</View>
@@ -19,20 +27,31 @@ export default function UserTarget({ text, value }: UserTargetProps) {
 }
 
 const styles = StyleSheet.create({
-	targetText: {
-		color: '#FFF',
-		fontSize: 22,
-		fontFamily: 'Montserrat_500Medium',
-	},
 	targetContainer: {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	textStyle: {
+		fontSize: 18,
 	},
 	target: {
-		fontSize: 26,
-		marginLeft: 10,
+		fontSize: 18,
 		fontFamily: 'Montserrat_900Black',
 		color: '#FFF',
+		backgroundColor: colors.mainPurple,
+		padding: 5,
+		borderRadius: 5,
+		marginLeft: 5,
+	},
+	goalsText: {
+		color: colors.mainPurple,
+		fontSize: 20,
+		fontFamily: 'Montserrat_700Bold',
+		marginBottom: 2,
+		backgroundColor: '#FFF',
+		borderRadius: 5,
+		padding: 5,
 	},
 });

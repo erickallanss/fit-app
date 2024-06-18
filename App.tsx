@@ -19,11 +19,13 @@ import {
 import { View } from 'react-native';
 import UserContextProvider from './src/contexts/UserContext';
 import HomePageScreen from './src/screens/HomePageScreen';
+import { StartTrainingScreen } from './src/screens/StartTrainingScreen';
 
 export type RootStackParamList = {
 	Login: undefined;
 	Register: undefined;
 	HomePage: undefined;
+	StartTraining: undefined;
 };
 
 export default function App() {
@@ -56,6 +58,10 @@ export default function App() {
 						<Stack.Screen
 							name="HomePage"
 							component={HomePageScreen}
+						/>
+						<Stack.Screen
+							name="StartTraining"
+							component={StartTrainingScreen}
 						/>
 					</Stack.Navigator>
 				</UserContextProvider>

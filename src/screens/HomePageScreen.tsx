@@ -12,6 +12,7 @@ import BottomBar from '../components/BottomBar';
 import UserTarget from '../components/UserTarget';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
+import colors from '../utils/colors';
 
 type HomePageScreenNavigationProps = {
 	navigation: StackNavigationProp<RootStackParamList, 'HomePage'>;
@@ -23,12 +24,12 @@ export default function HomePageScreen({
 	const UserContextValues = useContext(UserContext);
 	const name = UserContextValues?.name;
 	const currentWeight = UserContextValues?.currentWeight.toString() ?? '0';
-	const targetWeight = UserContextValues?.targetWeight.toString() ?? '0';
-	const user = UserContextValues?.saveLoginToCache('erick allan');
-	const userDinamic = UserContextValues?.loginName;
+	const weekGoal = UserContextValues?.weekGoal.toString() ?? '0';
+	const consecutiveWeeks =
+		UserContextValues?.consecutiveWeeks.toString() ?? '0';
 
 	const handleStartTraining = () => {
-		alert('Ive clicked in start training');
+		navigation.navigate('StartTraining');
 	};
 
 	const handleManageTraining = () => {
@@ -45,12 +46,22 @@ export default function HomePageScreen({
 			<StatusBar style="auto" />
 			<View style={styles.userInfo}>
 				<View>
-					<Text style={styles.userNameText}>Olá, {userDinamic}</Text>
+					<Text style={styles.userNameText}>
+						Olá, {name?.toLocaleUpperCase()}
+					</Text>
 				</View>
 				<View style={styles.userTargets}>
-					<UserTarget text="Você está com" value={currentWeight} />
-					<UserTarget text="Seu objetivo é" value={targetWeight} />
-					<UserTarget text="Ampolas de Deca:" value="3 und" />
+					<Text style={styles.targetHeader}>Seu resumo semanal</Text>
+					<UserTarget
+						text="Você está com"
+						value={currentWeight}
+						unit="kg"
+					/>
+					<UserTarget text="Treinos concluídos:" value={weekGoal} />
+					<UserTarget
+						text="Semanas seguidas de treino:"
+						value={consecutiveWeeks}
+					/>
 				</View>
 			</View>
 			<View style={styles.screenButtons}>
@@ -60,12 +71,14 @@ export default function HomePageScreen({
 					title="Iniciar treino"
 					onPress={handleStartTraining}
 				/>
+
 				<ButtonWithIcon
 					IconType={Feather}
 					icon="edit"
 					title="Gerenciar treinos"
 					onPress={handleManageTraining}
 				/>
+
 				<ButtonWithIcon
 					IconType={Octicons}
 					icon="graph"
@@ -91,7 +104,7 @@ const styles = StyleSheet.create({
 	},
 	userNameText: {
 		marginLeft: 30,
-		fontSize: 28,
+		fontSize: 26,
 		fontFamily: 'Montserrat_700Bold',
 		color: '#FFF',
 	},
@@ -101,21 +114,14 @@ const styles = StyleSheet.create({
 		marginRight: 30,
 		marginTop: 100,
 	},
-	targetContainer: {
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
-	},
-	targetText: {
+	targetHeader: {
 		color: '#FFF',
-		fontSize: 22,
-		fontFamily: 'Montserrat_500Medium',
-	},
-	target: {
-		fontSize: 26,
-		marginLeft: 10,
+		fontSize: 24,
 		fontFamily: 'Montserrat_900Black',
-		color: '#FFF',
+		marginBottom: 10,
+		backgroundColor: colors.mainPurple,
+		borderRadius: 5,
+		padding: 5,
 	},
 	screenButtons: {
 		width: '100%',

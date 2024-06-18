@@ -4,9 +4,9 @@ import { createContext, useState } from 'react';
 interface UserContextType {
 	name: string;
 	currentWeight: number;
-	targetWeight: number;
+	weekGoal: number;
+	consecutiveWeeks: number;
 	loginName: string;
-	saveLoginToCache: (user: string) => void;
 }
 
 // Context
@@ -21,17 +21,10 @@ export default function UserContextProvider({ children }: any) {
 	const contextValues = {
 		name: 'erick',
 		currentWeight: 85,
-		targetWeight: 90,
+		weekGoal: 2,
+		consecutiveWeeks: 3,
 		loginName,
-		saveLoginToCache,
 	};
-
-	function saveLoginToCache(user: string) {
-		console.log('Saving user to cache', user);
-		if (user !== '') {
-			setLoginName(user);
-		}
-	}
 
 	return (
 		<UserContext.Provider value={contextValues}>
