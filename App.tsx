@@ -20,6 +20,10 @@ import { View } from 'react-native';
 import UserContextProvider from './src/contexts/UserContext';
 import HomePageScreen from './src/screens/HomePageScreen';
 import { StartTrainingScreen } from './src/screens/StartTrainingScreen';
+import {
+	BottomBarContext,
+	BottomBarProvider,
+} from './src/contexts/BottomBarContext';
 
 export type RootStackParamList = {
 	Login: undefined;
@@ -48,23 +52,28 @@ export default function App() {
 	} else {
 		return (
 			<NavigationContainer>
-				<UserContextProvider>
-					<Stack.Navigator>
-						<Stack.Screen name="Login" component={LoginScreen} />
-						<Stack.Screen
-							name="Register"
-							component={RegisterScreen}
-						/>
-						<Stack.Screen
-							name="HomePage"
-							component={HomePageScreen}
-						/>
-						<Stack.Screen
-							name="StartTraining"
-							component={StartTrainingScreen}
-						/>
-					</Stack.Navigator>
-				</UserContextProvider>
+				<BottomBarProvider>
+					<UserContextProvider>
+						<Stack.Navigator>
+							<Stack.Screen
+								name="Login"
+								component={LoginScreen}
+							/>
+							<Stack.Screen
+								name="Register"
+								component={RegisterScreen}
+							/>
+							<Stack.Screen
+								name="HomePage"
+								component={HomePageScreen}
+							/>
+							<Stack.Screen
+								name="StartTraining"
+								component={StartTrainingScreen}
+							/>
+						</Stack.Navigator>
+					</UserContextProvider>
+				</BottomBarProvider>
 			</NavigationContainer>
 		);
 	}

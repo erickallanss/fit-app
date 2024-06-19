@@ -1,28 +1,36 @@
 import { StyleSheet, View } from 'react-native';
 import BottomBarIcon from './BottomBarIcon';
-import logo from '../../assets/images/logo.png';
 import { Feather } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../App';
+import { useBottomBar } from '../contexts/BottomBarContext';
+
+type NavigationProp = StackNavigationProp<RootStackParamList>;
 
 export default function BottomBar() {
-	const [selectedIcon, setSelectedIcon] = useState('user');
+	const navigation = useNavigation<NavigationProp>();
+	const { selectedButton, setSelectedButton } = useBottomBar();
 
 	const handleClickProfile = () => {
-		setSelectedIcon('user');
+		setSelectedButton('user');
+		navigation.navigate('HomePage');
 	};
 	const handleClickMyEvolution = () => {
-		setSelectedIcon('graph');
+		setSelectedButton('graph');
 	};
 	const handleClickStartTrain = () => {
-		setSelectedIcon('fitness-center');
+		setSelectedButton('fitness-center');
+		navigation?.navigate('StartTraining');
 	};
 	const handleClickAddTrain = () => {
-		setSelectedIcon('diff-added');
+		setSelectedButton('diff-added');
 	};
 	const handleClickManageTrain = () => {
-		setSelectedIcon('edit');
+		setSelectedButton('edit');
 	};
 
 	return (
@@ -30,31 +38,31 @@ export default function BottomBar() {
 			<BottomBarIcon
 				IconType={Feather}
 				icon="user"
-				selected={selectedIcon === 'user'}
+				selected={selectedButton === 'user'}
 				onPress={handleClickProfile}
 			/>
 			<BottomBarIcon
 				IconType={Octicons}
 				icon="graph"
-				selected={selectedIcon === 'graph'}
+				selected={selectedButton === 'graph'}
 				onPress={handleClickMyEvolution}
 			/>
 			<BottomBarIcon
 				IconType={MaterialIcons}
 				icon="fitness-center"
-				selected={selectedIcon === 'fitness-center'}
+				selected={selectedButton === 'fitness-center'}
 				onPress={handleClickStartTrain}
 			/>
 			<BottomBarIcon
 				IconType={Octicons}
 				icon="diff-added"
-				selected={selectedIcon === 'diff-added'}
+				selected={selectedButton === 'diff-added'}
 				onPress={handleClickAddTrain}
 			/>
 			<BottomBarIcon
 				IconType={Feather}
 				icon="edit"
-				selected={selectedIcon === 'edit'}
+				selected={selectedButton === 'edit'}
 				onPress={handleClickManageTrain}
 			/>
 		</View>
